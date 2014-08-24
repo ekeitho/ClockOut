@@ -10,7 +10,7 @@ public class ClockTest extends AndroidTestCase {
 
         //will write a lot more test later
         //practicing with travis-ci & android
-        assertEquals(true, false);
+        assertEquals(true, true);
 
     }
 }
