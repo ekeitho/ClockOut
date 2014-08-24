@@ -1,0 +1,27 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:pixlui="http://schemas.android.com/apk/com.neopixl.pixlui"
+    android:layout_width="match_parent"
+    android:id="@+id/frag_pick_layout"
+    android:layout_height="wrap_content"
+    android:background="@drawable/border"
+    android:orientation="vertical"
+    android:clickable="true">
+
+
+    <com.neopixl.pixlui.components.edittext.EditText
+        android:layout_marginTop="5dp"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:hint="@string/hours_working"
+        android:textColorHint="#fff44f"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberSigned"
+        android:ems="10"
+        android:imeOptions="actionDone"
+        android:id="@+id/frag_pick"
+        pixlui:typeface="Roboto-Light.ttf"
+        />
+
+</FrameLayout>
