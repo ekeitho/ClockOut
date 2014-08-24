@@ -4,13 +4,6 @@ android {
     compileSdkVersion 20
     buildToolsVersion "20.0.0"
 
-    sourceSets {
-        instrumentTest.setRoot('app/src/androidTest')
-        instrumentTest {
-            java.srcDirs = ['app/src/androidTest/java/com/ekeitho/clocksubtract']
-        }
-    }
-
     defaultConfig {
         applicationId "com.ekeitho.clocksubtract"
         minSdkVersion 16
