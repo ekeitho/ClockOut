@@ -4,7 +4,8 @@ android:
     # Uncomment the lines below if you want to
     # use the latest revision of Android SDK Tools
     - platform-tools
-    # - tools
+    - tools
+    - extra-android-support
 
     # The BuildTools version used by your project
     - build-tools-20.0.0
@@ -17,7 +18,7 @@ android:
     - sys-img-armeabi-v7a-android-19
 
     # Emulator Management: Create, Start and Wait
-    # before_script:
+    before_script:
     - echo no | android create avd --force -n test -t android-19 --abi armeabi-v7a
     - emulator -avd test -no-skin -no-audio -no-window &
     - android-wait-for-emulator
