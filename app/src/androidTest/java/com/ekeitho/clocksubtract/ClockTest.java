@@ -6,7 +6,7 @@ import android.test.AndroidTestCase;
  * Test Case for ClockSubtract2.0
  */
 public class ClockTest extends AndroidTestCase {
-    public void check() {
+    public void testCheck() {
 
         //will write a lot more test later
         //practicing with travis-ci & android
