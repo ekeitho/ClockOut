@@ -106,6 +106,7 @@ public class MainActivity extends FragmentActivity implements ActivityCommunicat
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
     public void addDates(Date date, String key) {
         past_clocks.put(key, date);
     }
@@ -188,7 +189,7 @@ public class MainActivity extends FragmentActivity implements ActivityCommunicat
 
     /* algorithm for finding the time need to clock out */
     @Override
-    public void calculate() {
+    public Date calculate() {
         // numbers based on the Date() times
         // 60 000 = one minutes
         // 3 600 000 = one hour
@@ -218,7 +219,6 @@ public class MainActivity extends FragmentActivity implements ActivityCommunicat
         //finds from the subtraction of how many hours needed to work
         int hours_left = sub / hour_date_time;
         int minutes_left = (sub - (hours_left * hour_date_time)) / minute_date_time;
-        Log.v("Diff", "Hours added " + hours_left + " minutes added " + minutes_left);
 
 
         Date final_date = new Date(Calendar.getInstance().get(Calendar.YEAR),
@@ -234,6 +234,8 @@ public class MainActivity extends FragmentActivity implements ActivityCommunicat
         //empty list for next iteration if necessary
         past_clocks.clear();
         sub_view.setText(null);
+
+        return final_date;
     }
 
 }
