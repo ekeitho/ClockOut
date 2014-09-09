@@ -1,5 +1,6 @@
 package com.ekeitho.clocksubtract;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 
 import com.doomonafireball.betterpickers.radialtimepicker.RadialPickerLayout;
 import com.doomonafireball.betterpickers.radialtimepicker.RadialTimePickerDialog;
+import com.ekeitho.clocksubtract.service.ScheduleClient;
 import com.neopixl.pixlui.components.textview.TextView;
 
 import org.joda.time.DateTime;
@@ -31,6 +33,7 @@ public class MainActivity extends FragmentActivity implements ActivityCommunicat
     private Animation animation_fade;
     private ViewPager viewPager;
     private HashMap<String, Date> past_clocks = new HashMap<String, Date>();
+    private ScheduleClient scheduleClient;
 
     @Override
     public HashMap<String, Date> getMap() {
@@ -41,6 +44,10 @@ public class MainActivity extends FragmentActivity implements ActivityCommunicat
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        /* Create a new service client and bind our activity to this service */
+        scheduleClient = new ScheduleClient(this);
+        scheduleClient.doBindService();
 
         /* set up */
         formatter = new SimpleDateFormat("MMM d, h:mm a");
@@ -64,6 +71,7 @@ public class MainActivity extends FragmentActivity implements ActivityCommunicat
         gcyear = calendar.get(Calendar.YEAR);
         gcmonth = calendar.get(Calendar.MONTH);
         gcday = calendar.get(Calendar.DAY_OF_MONTH);
+
     }
 
     @Override
@@ -228,6 +236,7 @@ public class MainActivity extends FragmentActivity implements ActivityCommunicat
                 date3.getMinutes() + minutes_left);
 
 
+        scheduleClient.setAlarmForNotification(final_date);
         view.setText("You need to clock out at\n " + formatter.format(final_date));
         view.startAnimation(animation_fade);
 
