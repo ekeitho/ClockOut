@@ -1,8 +1,8 @@
 package com.ekeitho.clocksubtract;
 
-import android.support.v4.app.FragmentActivity;
 import android.test.ActivityInstrumentationTestCase2;
-import com.neopixl.pixlui.components.button.Button;
+
+import com.ekeitho.clocksubtract.ui.MainActivity;
 import com.neopixl.pixlui.components.textview.TextView;
 
 import java.util.Calendar;

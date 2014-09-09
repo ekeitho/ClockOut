@@ -1,4 +1,4 @@
-package com.ekeitho.clocksubtract;
+package com.ekeitho.clocksubtract.ui;
 
 
 import android.app.Activity;
@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.ekeitho.clocksubtract.R;
 import com.neopixl.pixlui.components.button.Button;
 
 /**
@@ -25,7 +27,6 @@ public class First_Clock_In extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.first_clock_in, container, false);
-
         Button button = (Button) view.findViewById(R.id.first_clock_in_button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override

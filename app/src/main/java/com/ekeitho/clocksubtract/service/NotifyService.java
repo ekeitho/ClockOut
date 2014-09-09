@@ -1,6 +1,5 @@
 package com.ekeitho.clocksubtract.service;
 
-import android.R;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -10,7 +9,8 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
 
-import com.ekeitho.clocksubtract.MainActivity;
+import com.ekeitho.clocksubtract.R;
+import com.ekeitho.clocksubtract.ui.MainActivity;
 
 
 /**
@@ -31,6 +31,8 @@ public class NotifyService extends Service {
     // Name of an intent extra we can use to identify if
     // this service was started to create a notification
     public static final String INTENT_NOTIFY = "com.ekeitho.subtract.service.INTENT_NOTIFY";
+    // Name of intent to pass date string
+    public static final String DATE_NOTIFY = "com.ekeitho.subtract.service.DATE_NOTIFY";
     // The system notification manager
     private NotificationManager mNM;
 
@@ -47,6 +49,7 @@ public class NotifyService extends Service {
     public void onCreate() {
         Log.i("NotifyService", "onCreate()");
         mNM = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        WakeLocker.acquire(this);
     }
 
     @Override
@@ -54,12 +57,8 @@ public class NotifyService extends Service {
         Log.i("LocalService", "Received start id " + startId + ": " + intent);
 
         // If this service was started by out AlarmTask intent then we want to show our notification
-        if(intent.getBooleanExtra(INTENT_NOTIFY, false)) {
-            showNotification();
-            Log.v("POOOOP", "POOOOPY !!");
-        }
-        else
-            Log.v("FAILURE", "FAILURE !!");
+        if(intent.getBooleanExtra(INTENT_NOTIFY, false) && intent.getStringExtra(DATE_NOTIFY) != null)
+            showNotification(intent.getStringExtra(DATE_NOTIFY));
 
         // We don't care if this service is stopped as we have already delivered our notification
         return START_NOT_STICKY;
@@ -73,13 +72,13 @@ public class NotifyService extends Service {
     /**
      * Creates a notification and shows it in the OS drag-down status bar
      */
-    private void showNotification() {
+    private void showNotification(String dateFormat) {
         // This is the 'title' of the notification
-        CharSequence title = "Alarm!!";
+        CharSequence title = "ClockOut";
         // This is the icon to use on the notification
-        int icon = R.drawable.ic_dialog_alert;
+        int icon = R.drawable.ic_launcher;
         // This is the scrolling text of the notification
-        CharSequence text = "Your notification time is upon us.";
+        CharSequence text = "Remember to clock out at " + dateFormat + ".";
         // What time to show on the notification
         long time = System.currentTimeMillis();
 
@@ -96,7 +95,7 @@ public class NotifyService extends Service {
 
         // Send the notification to the system.
         mNM.notify(NOTIFICATION, notification);
-
+        WakeLocker.release();
         // Stop the service when we are finished
         stopSelf();
     }

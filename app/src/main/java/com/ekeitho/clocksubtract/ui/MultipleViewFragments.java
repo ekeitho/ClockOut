@@ -1,4 +1,4 @@
-package com.ekeitho.clocksubtract;
+package com.ekeitho.clocksubtract.ui;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

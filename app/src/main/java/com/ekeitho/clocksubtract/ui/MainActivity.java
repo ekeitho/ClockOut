@@ -1,6 +1,5 @@
-package com.ekeitho.clocksubtract;
+package com.ekeitho.clocksubtract.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
@@ -13,6 +12,7 @@ import android.widget.Toast;
 
 import com.doomonafireball.betterpickers.radialtimepicker.RadialPickerLayout;
 import com.doomonafireball.betterpickers.radialtimepicker.RadialTimePickerDialog;
+import com.ekeitho.clocksubtract.R;
 import com.ekeitho.clocksubtract.service.ScheduleClient;
 import com.neopixl.pixlui.components.textview.TextView;
 
@@ -247,4 +247,9 @@ public class MainActivity extends FragmentActivity implements ActivityCommunicat
         return final_date;
     }
 
+    @Override
+    protected void onDestroy() {
+        scheduleClient.doUnbindService();
+        super.onDestroy();
+    }
 }

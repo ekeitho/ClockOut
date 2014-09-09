@@ -1,4 +1,4 @@
-package com.ekeitho.clocksubtract;
+package com.ekeitho.clocksubtract.ui;
 
 import java.util.Date;
 import java.util.HashMap;

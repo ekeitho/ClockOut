@@ -1,10 +1,11 @@
-package com.ekeitho.clocksubtract;
+package com.ekeitho.clocksubtract.ui;
 
 
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import com.ekeitho.clocksubtract.R;
 import com.neopixl.pixlui.components.edittext.EditText;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
