@@ -4,9 +4,11 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
+import android.os.Vibrator;
 import android.util.Log;
 
 import com.ekeitho.clocksubtract.R;
@@ -96,6 +98,9 @@ public class NotifyService extends Service {
         // Send the notification to the system.
         mNM.notify(NOTIFICATION, notification);
         WakeLocker.release();
+        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        // Vibrate for 500 milliseconds
+        v.vibrate(500);
         // Stop the service when we are finished
         stopSelf();
     }
