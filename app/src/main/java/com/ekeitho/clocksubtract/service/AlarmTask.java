@@ -8,6 +8,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -40,9 +41,15 @@ public class AlarmTask implements Runnable {
         PendingIntent pendingIntent = PendingIntent.getService(context, 0, intent, 0);
 
         Calendar calendar1 = Calendar.getInstance();
-        calendar1.set(Calendar.DAY_OF_MONTH, date.getDay());
+        calendar1.set(Calendar.MONTH, date.getMonth());
+        calendar1.set(Calendar.DAY_OF_WEEK, date.getDay());
         calendar1.set(Calendar.HOUR_OF_DAY, date.getHours());
         calendar1.set(Calendar.MINUTE, date.getMinutes());
+
+        Calendar calendar = Calendar.getInstance();
+        Log.v("CURRENT", calendar.getTimeInMillis() + "" );
+        Log.v("CALLL", calendar1.getTimeInMillis() + "" );
+
 
         // Sets an alarm - note this alarm will be lost if the phone is turned off and on again
         // 300,000 = 5 minutees
