@@ -1,0 +1,30 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <CheckBoxPreference
+        android:key="@string/wakeup_phone_key"
+        android:title="@string/wakeup_phone"
+        android:summaryOn="@string/wakeup_phone_on"
+        android:summaryOff="@string/wakeup_phone_off"
+        android:defaultValue="@string/wakeup_phone_default" />
+
+    <CheckBoxPreference
+        android:key="@string/pref_vibrate_key"
+        android:title="@string/pref_vibrate"
+        android:summaryOn="@string/pref_vibrate_on"
+        android:summaryOff="@string/pref_vibrate_off"
+        android:defaultValue="@string/pref_vibrate_default" />
+
+    <!-- NOTE: EditTextPreference accepts EditText attributes. -->
+    <!-- NOTE: EditTextPreference's summary should be set to its value by the activity code. -->
+    <EditTextPreference
+        android:key="name_text"
+        android:title="@string/pref_title_display_name"
+        android:defaultValue="@string/pref_default_display_name"
+        android:selectAllOnFocus="true"
+        android:inputType="textCapWords"
+        android:capitalize="words"
+        android:singleLine="true"
+        android:maxLines="1" />
+
+
+</PreferenceScreen>

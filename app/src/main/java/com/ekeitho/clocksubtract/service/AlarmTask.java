@@ -40,6 +40,7 @@ public class AlarmTask implements Runnable {
         PendingIntent pendingIntent = PendingIntent.getService(context, 0, intent, 0);
 
         Calendar calendar1 = Calendar.getInstance();
+        calendar1.set(Calendar.DAY_OF_MONTH, date.getDay());
         calendar1.set(Calendar.HOUR_OF_DAY, date.getHours());
         calendar1.set(Calendar.MINUTE, date.getMinutes());
 

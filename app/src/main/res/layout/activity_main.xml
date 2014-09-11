@@ -13,7 +13,6 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textAlignment="center"
-        android:text="@string/welcome"
         android:includeFontPadding="false"
         android:gravity="center"
         android:layout_weight="4"

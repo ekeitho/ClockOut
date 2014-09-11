@@ -21,8 +21,8 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:support-v4:20.0.0'
     compile files('libs/pixlui-1-0-5.jar')
-    compile ("com.doomonafireball.betterpickers:library:1.5.2")
-    compile "joda-time:joda-time:2.3"
+    compile 'com.android.support:support-v4:20.0.0'
+    compile 'com.doomonafireball.betterpickers:library:1.5.2'
+    compile 'joda-time:joda-time:2.3'
 }

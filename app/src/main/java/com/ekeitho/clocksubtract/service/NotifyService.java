@@ -6,9 +6,11 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.Vibrator;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.ekeitho.clocksubtract.R;
@@ -27,7 +29,6 @@ public class NotifyService extends Service {
 
     // This is the object that receives interactions from clients
     private final IBinder mBinder = new ServiceBinder();
-
     // Unique id to identify the notification.
     private static final int NOTIFICATION = 0;
     // Name of an intent extra we can use to identify if
@@ -37,6 +38,9 @@ public class NotifyService extends Service {
     public static final String DATE_NOTIFY = "com.ekeitho.subtract.service.DATE_NOTIFY";
     // The system notification manager
     private NotificationManager mNM;
+    // The shared preference for wake up
+    private SharedPreferences prefs;
+
 
     /**
      * Class for clients to access
@@ -51,7 +55,12 @@ public class NotifyService extends Service {
     public void onCreate() {
         Log.i("NotifyService", "onCreate()");
         mNM = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        WakeLocker.acquire(this);
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+
+        // checks to make sure wakelock is set true on the settings
+        if( prefs.getBoolean(getString(R.string.pref_vibrate_key), false)) {
+            WakeLocker.acquire(this);
+        }
     }
 
     @Override
@@ -69,6 +78,35 @@ public class NotifyService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         return mBinder;
+    }
+
+    private void checkNotifcationSettings() {
+        String displayWakeupKey = this.getString(R.string.wakeup_phone_key);
+        // if wake up enabled
+        boolean defaultForWakeup =
+                Boolean.parseBoolean(this.getString(R.string.wakeup_phone_default));
+        boolean wakeupEnabled =
+                prefs.getBoolean(displayWakeupKey, defaultForWakeup);
+
+        if (wakeupEnabled) {
+            Log.v("Wakeup", "ENABLED");
+            WakeLocker.release();
+        }
+
+        String displayVibrateKey = this.getString(R.string.pref_vibrate_key);
+        //if vibrate enabled
+        boolean defaultForVibrate =
+                Boolean.parseBoolean(this.getString(R.string.pref_vibrate_default));
+        boolean vibrateEnabled =
+                prefs.getBoolean(displayVibrateKey, defaultForVibrate);
+
+        if( vibrateEnabled ) {
+            Log.v("Vibrate", "ENABLED");
+            Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+            // Vibrate for 500 milliseconds
+            v.vibrate(500);
+        }
+
     }
 
     /**
@@ -97,10 +135,8 @@ public class NotifyService extends Service {
 
         // Send the notification to the system.
         mNM.notify(NOTIFICATION, notification);
-        WakeLocker.release();
-        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        // Vibrate for 500 milliseconds
-        v.vibrate(500);
+
+        checkNotifcationSettings();
         // Stop the service when we are finished
         stopSelf();
     }

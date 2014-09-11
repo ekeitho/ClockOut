@@ -1,6 +1,10 @@
 package com.ekeitho.clocksubtract.ui;
 
+import android.app.ActivityOptions;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -34,6 +38,7 @@ public class MainActivity extends FragmentActivity implements ActivityCommunicat
     private ViewPager viewPager;
     private HashMap<String, Date> past_clocks = new HashMap<String, Date>();
     private ScheduleClient scheduleClient;
+    private SharedPreferences prefs;
 
     @Override
     public HashMap<String, Date> getMap() {
@@ -45,6 +50,9 @@ public class MainActivity extends FragmentActivity implements ActivityCommunicat
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        /* get shared preference for settings values */
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+
         /* Create a new service client and bind our activity to this service */
         scheduleClient = new ScheduleClient(this);
         scheduleClient.doBindService();
@@ -52,6 +60,7 @@ public class MainActivity extends FragmentActivity implements ActivityCommunicat
         /* set up */
         formatter = new SimpleDateFormat("MMM d, h:mm a");
         view = (TextView) findViewById(R.id.welcome_text);
+        view.setText(getString(R.string.welcome) + "\n" + prefs.getString("name_text", ""));
         sub_view = (TextView) findViewById(R.id.past_choices_textview);
 
         /* sets up the swipe fragment views */
@@ -71,6 +80,7 @@ public class MainActivity extends FragmentActivity implements ActivityCommunicat
         gcyear = calendar.get(Calendar.YEAR);
         gcmonth = calendar.get(Calendar.MONTH);
         gcday = calendar.get(Calendar.DAY_OF_MONTH);
+
 
     }
 
@@ -102,15 +112,19 @@ public class MainActivity extends FragmentActivity implements ActivityCommunicat
         return true;
     }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                Intent intent = new Intent(this, SettingsActivity.class);
+                startActivityForResult(intent, 1);
+                break;
         }
+
         return super.onOptionsItemSelected(item);
     }
 
