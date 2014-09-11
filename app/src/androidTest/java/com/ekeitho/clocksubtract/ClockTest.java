@@ -43,7 +43,6 @@ public class ClockTest extends ActivityInstrumentationTestCase2<MainActivity> {
 
         //will write a lot more test later
         //practicing with travis-ci & android
-        assertEquals("Welcome to Clockout", welcome_view.getText().toString());
         runTestOnUiThread(new Runnable() {
             @Override
             public void run() {
