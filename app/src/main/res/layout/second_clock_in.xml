@@ -14,7 +14,7 @@
     <com.neopixl.pixlui.components.textview.TextView
         android:gravity="center"
         android:textColor="#FFFFFF"
-        android:text="When did you clock back in?"
+        android:text="@string/second_clock_in"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         pixlui:typeFace="RobotoCondensed-Bold.ttf"
@@ -22,7 +22,7 @@
         />
 
     <com.neopixl.pixlui.components.button.Button
-        android:text="Clock-In"
+        android:text="@string/clock_in"
         android:textSize="12sp"
         pixlui:typeFace="Roboto-Thin.ttf"
         android:id="@+id/second_clock_in_button"
