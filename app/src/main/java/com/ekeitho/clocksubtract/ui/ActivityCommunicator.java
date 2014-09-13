@@ -7,6 +7,7 @@ public interface ActivityCommunicator {
 
     public HashMap<String, Date> getMap();
     public void addDates(Date date, String key);
+    public void setChosenDate(Date date);
     public void switchFragment(int index);
     public void listenerClocks(final String order, final int index);
     public void passIntToActivity(int hours_worked);

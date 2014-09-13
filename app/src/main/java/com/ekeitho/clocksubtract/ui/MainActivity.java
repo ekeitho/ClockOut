@@ -39,6 +39,8 @@ public class MainActivity extends FragmentActivity implements ActivityCommunicat
     private HashMap<String, Date> past_clocks = new HashMap<String, Date>();
     private ScheduleClient scheduleClient;
     private SharedPreferences prefs;
+    /* this date is used to set clocks to your last chosen time */
+    private Date last_date;
 
     @Override
     public HashMap<String, Date> getMap() {
@@ -158,9 +160,6 @@ public class MainActivity extends FragmentActivity implements ActivityCommunicat
         } else {
             flag++;
 
-            /* using for radial picker time clocks preset times */
-            DateTime now = DateTime.now();
-
             RadialTimePickerDialog timePickerDialog = RadialTimePickerDialog
                     .newInstance(new RadialTimePickerDialog.OnTimeSetListener() {
 
@@ -174,6 +173,7 @@ public class MainActivity extends FragmentActivity implements ActivityCommunicat
                             //of clocks without repetition usage
                             addDates(date, order);
                             setPastTimes(index);
+                            setChosenDate(date);
 
                             switch (index + 1) {
                                 case 1:
@@ -188,7 +188,7 @@ public class MainActivity extends FragmentActivity implements ActivityCommunicat
                                     break;
                             }
                         }
-                    }, now.getHourOfDay(), now.getMinuteOfHour(), false);
+                    }, last_date.getHours(), last_date.getMinutes(), false);
             timePickerDialog.show(getSupportFragmentManager(), "ClockOutput");
         }
     }
@@ -207,6 +207,11 @@ public class MainActivity extends FragmentActivity implements ActivityCommunicat
     @Override
     public void passIntToActivity(int hours_worked) {
         hours = hours_worked;
+    }
+
+    @Override
+    public void setChosenDate(Date date) {
+        last_date = date;
     }
 
     /* algorithm for finding the time need to clock out */

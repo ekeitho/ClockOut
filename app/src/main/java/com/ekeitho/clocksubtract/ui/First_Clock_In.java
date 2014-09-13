@@ -11,6 +11,10 @@ import android.view.ViewGroup;
 import com.ekeitho.clocksubtract.R;
 import com.neopixl.pixlui.components.button.Button;
 
+import org.joda.time.DateTime;
+
+import java.util.Date;
+
 /**
  *  First fragment for when the user gets into work or first clock in.
  */
@@ -28,6 +32,12 @@ public class First_Clock_In extends Fragment {
 
         View view = inflater.inflate(R.layout.first_clock_in, container, false);
         Button button = (Button) view.findViewById(R.id.first_clock_in_button);
+
+        /* using for radial picker time clocks preset times */
+        DateTime now = DateTime.now();
+        Date date = now.toDate();
+        activityCommunicator.setChosenDate(date);
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
