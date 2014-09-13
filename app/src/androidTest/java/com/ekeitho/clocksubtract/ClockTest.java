@@ -46,17 +46,24 @@ public class ClockTest extends ActivityInstrumentationTestCase2<MainActivity> {
         runTestOnUiThread(new Runnable() {
             @Override
             public void run() {
-                date = addSuccessiveDates(7,32,8,45,9,52);
+                date = addSuccessiveDates(7,32,8,45,9,52,8);
+                //should equal 4:39 PM
+                //hours are in 24hr format
+                assertEquals(date.getHours(), 16);
+                assertEquals(date.getMinutes(), 39);
+
+                date = addSuccessiveDates(7,0,12,0,1,0,8);
+                assertEquals(date.getHours(), 4);
+                assertEquals(date.getMinutes(), 0);
+
             }
         });
 
-        //should equal 4:39 PM
-        //hours are in 24hr format
-        assertEquals(date.getHours(), 16);
-        assertEquals(date.getMinutes(), 39);
+
     }
 
-    private Date addSuccessiveDates(int hour1, int min1, int hour2, int min2, int hour3, int min3) {
+    private Date addSuccessiveDates(int hour1, int min1, int hour2, int min2, int hour3, int min3,
+                                    int hours_worked) {
         /* set up the dates */
         Date date1 = new Date(Calendar.getInstance().get(Calendar.YEAR),
                 Calendar.getInstance().get(Calendar.MONTH),
@@ -78,7 +85,7 @@ public class ClockTest extends ActivityInstrumentationTestCase2<MainActivity> {
         mainActivity.addDates(date1, "First");
         mainActivity.addDates(date2, "Second");
         mainActivity.addDates(date3, "Third");
-        mainActivity.passIntToActivity(8);
+        mainActivity.passIntToActivity(hours_worked);
 
         /* calculate from the given dates */
         return mainActivity.calculate();
