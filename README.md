@@ -1,6 +1,6 @@
 #v2.0.0
 
-### ClockOut [![Build Status](https://travis-ci.org/ekeitho/ClockOut.svg?branch=v2.0.0)](https://travis-ci.org/ekeitho/ClockOut)
+### ClockOut [![Build Status](https://travis-ci.org/ekeitho/ClockOut.svg?branch=master)](https://travis-ci.org/ekeitho/ClockOut)
 
 ## Description
 ClockOut is for hourly workers who need to find out when they have to clock out. 
