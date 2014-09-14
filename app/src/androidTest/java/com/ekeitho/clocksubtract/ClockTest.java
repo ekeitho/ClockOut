@@ -15,7 +15,7 @@ public class ClockTest extends ActivityInstrumentationTestCase2<MainActivity> {
 
     MainActivity mainActivity = null;
     TextView welcome_view = null;
-    Date date = null;
+    Date date1 = null, date2 = null;
 
     public ClockTest()
     {
@@ -46,18 +46,15 @@ public class ClockTest extends ActivityInstrumentationTestCase2<MainActivity> {
         runTestOnUiThread(new Runnable() {
             @Override
             public void run() {
-                date = addSuccessiveDates(7,32,8,45,9,52,8);
-                //should equal 4:39 PM
-                //hours are in 24hr format
-                assertEquals(date.getHours(), 16);
-                assertEquals(date.getMinutes(), 39);
-
-                date = addSuccessiveDates(7,0,12,0,1,0,8);
-                assertEquals(date.getHours(), 4);
-                assertEquals(date.getMinutes(), 0);
-
+                date1 = addSuccessiveDates(7,32,8,45,9,52,8);
+                date2 = addSuccessiveDates(7,0,12,0,1,0,8);
             }
         });
+
+        assertEquals(date1.getHours(), 16);
+        assertEquals(date1.getMinutes(), 39);
+        assertEquals(date2.getHours(), 4);
+        assertEquals(date2.getMinutes(), 0);
 
 
     }
