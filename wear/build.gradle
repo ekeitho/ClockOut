@@ -6,7 +6,7 @@ android {
     buildToolsVersion "20.0.0"
 
     defaultConfig {
-        applicationId "com.ekeitho.wearsample"
+        applicationId "com.ekeitho.clocksubtract"
         minSdkVersion 20
         targetSdkVersion 20
         versionCode 1
@@ -22,6 +22,7 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile "com.android.support:support-v4:20.0.+"
     compile 'com.google.android.support:wearable:1.0.0'
     compile 'com.google.android.gms:play-services-wearable:5.0.77'
 }
