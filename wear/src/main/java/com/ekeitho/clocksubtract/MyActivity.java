@@ -1,9 +1,12 @@
-package com.ekeitho.wearsample;
+package com.ekeitho.clocksubtract;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.wearable.view.WatchViewStub;
 import android.widget.TextView;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
+import android.support.v4.app.NotificationCompat.WearableExtender;
 
 public class MyActivity extends Activity {
 
